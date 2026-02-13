@@ -2,9 +2,6 @@
 
 一次性安装 `GamePowers + superpowers + beads(bd)`。
 
-- GitHub 仓库：`https://github.com/yangwuan55/gamepowers`
-- 在线安装文档：`https://raw.githubusercontent.com/yangwuan55/gamepowers/refs/heads/main/.codex/INSTALL.md`
-
 ## 前置条件
 
 - Git

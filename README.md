@@ -27,15 +27,8 @@ GamePowers 是一个面向游戏研发的 AI 技能扩展，定位为 `superpowe
 6. 通过 `design-handoff-to-superpowers` 交接给 superpowers 进入实现。
 
 ## 安装
-### 一次性安装（推荐）
-```bash
-cd /Users/ymr/github/gamepowers
-./tools/install_all.sh
-```
-
-也可以直接把安装文档交给 AI 执行：`/Users/ymr/github/gamepowers/.codex/INSTALL.md`  
-在线版本：`https://raw.githubusercontent.com/yangwuan55/gamepowers/refs/heads/main/.codex/INSTALL.md`  
-仓库地址：`https://github.com/yangwuan55/gamepowers`
+### 安装（推荐）
+`Fetch and follow instructions from https://raw.githubusercontent.com/yangwuan55/gamepowers/refs/heads/main/.codex/INSTALL.md`  
 
 该脚本会自动完成：
 - 安装或更新 `beads`（`bd` 命令）。
