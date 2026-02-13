@@ -34,8 +34,11 @@ GamePowers 是一个面向游戏研发的 AI 技能扩展，定位为 `superpowe
 - 安装或更新 `beads`（`bd` 命令）。
 - 安装或更新 `superpowers` 到 `~/.codex/superpowers`。
 - 建立 `~/.agents/skills/superpowers -> ~/.codex/superpowers/skills` 软链。
+- 建立 `~/.agents/skills/gamepowers -> <当前仓库>/skills` 软链。
 - 安装当前 `gamepowers`（`pip install -e .`）。
 - 当前仓库未初始化时自动执行 `bd init`。
+
+说明：即使 `pip install -e .` 在系统 Python 下受限（如 PEP 668），脚本也会先完成 skills 软链，因此 GamePowers 仍可在 Codex 中被发现。
 
 安装后请重启 Codex 以确保 `superpowers` skills 被发现。
 

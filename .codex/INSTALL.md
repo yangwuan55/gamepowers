@@ -26,8 +26,11 @@
    - `beads`（`bd` 命令）
    - `superpowers`（路径：`~/.codex/superpowers`）
    - skills 软链（`~/.agents/skills/superpowers -> ~/.codex/superpowers/skills`）
+   - skills 软链（`~/.agents/skills/gamepowers -> ~/.codex/gamepowers/skills`）
    - 当前 `gamepowers` 包（`pip install -e .`）
    - `bd init`（当仓库还没有 `.beads` 时）
+
+   注：若系统 Python 限制 `pip install -e .`（例如 PEP 668），skills 软链仍会创建成功，不影响在 Codex 中使用 GamePowers skills。
 
 3. **重启 Codex**，让 skills 发现机制生效。
 
@@ -37,6 +40,7 @@
 bd version
 gamepowers --help
 ls -la ~/.agents/skills/superpowers
+ls -la ~/.agents/skills/gamepowers
 ```
 
 可选验证：

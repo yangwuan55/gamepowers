@@ -15,6 +15,8 @@ AGENTS_HOME="${AGENTS_HOME:-${HOME}/.agents}"
 SUPERPOWERS_DIR="${CODEX_HOME}/superpowers"
 SUPERPOWERS_SKILLS_LINK="${AGENTS_HOME}/skills/superpowers"
 SUPERPOWERS_SKILLS_TARGET="${SUPERPOWERS_DIR}/skills"
+GAMEPOWERS_SKILLS_LINK="${AGENTS_HOME}/skills/gamepowers"
+GAMEPOWERS_SKILLS_TARGET="${REPO_ROOT}/skills"
 
 DRY_RUN=0
 SKIP_BD_INIT=0
@@ -49,6 +51,33 @@ run_shell() {
     return 0
   fi
   bash -lc "${command}"
+}
+
+ensure_symlink() {
+  local link_path="$1"
+  local target_path="$2"
+  local display_name="$3"
+
+  run_cmd mkdir -p "$(dirname "${link_path}")"
+
+  if [[ -L "${link_path}" ]]; then
+    local current_target
+    current_target="$(readlink "${link_path}" || true)"
+    if [[ "${current_target}" != "${target_path}" ]]; then
+      log "更新 ${display_name} 软链: ${link_path} -> ${target_path}"
+      run_cmd rm -f "${link_path}"
+      run_cmd ln -s "${target_path}" "${link_path}"
+    fi
+    return
+  fi
+
+  if [[ -e "${link_path}" ]]; then
+    echo "${display_name} 目标已存在且不是软链: ${link_path}" >&2
+    exit 1
+  fi
+
+  log "创建 ${display_name} 软链: ${link_path} -> ${target_path}"
+  run_cmd ln -s "${target_path}" "${link_path}"
 }
 
 install_bd() {
@@ -90,27 +119,29 @@ install_or_update_superpowers() {
     run_cmd git clone https://github.com/obra/superpowers.git "${SUPERPOWERS_DIR}"
   fi
 
-  log "配置 superpowers skills 软链到 ${SUPERPOWERS_SKILLS_LINK}"
-  run_cmd mkdir -p "${AGENTS_HOME}/skills"
-
-  if [[ -L "${SUPERPOWERS_SKILLS_LINK}" ]]; then
-    local current_target
-    current_target="$(readlink "${SUPERPOWERS_SKILLS_LINK}" || true)"
-    if [[ "${current_target}" != "${SUPERPOWERS_SKILLS_TARGET}" ]]; then
-      run_cmd rm -f "${SUPERPOWERS_SKILLS_LINK}"
-      run_cmd ln -s "${SUPERPOWERS_SKILLS_TARGET}" "${SUPERPOWERS_SKILLS_LINK}"
-    fi
-  elif [[ -e "${SUPERPOWERS_SKILLS_LINK}" ]]; then
-    echo "目标已存在且不是软链: ${SUPERPOWERS_SKILLS_LINK}" >&2
-    exit 1
-  else
-    run_cmd ln -s "${SUPERPOWERS_SKILLS_TARGET}" "${SUPERPOWERS_SKILLS_LINK}"
-  fi
+  ensure_symlink "${SUPERPOWERS_SKILLS_LINK}" "${SUPERPOWERS_SKILLS_TARGET}" "superpowers skills"
 }
 
 install_gamepowers() {
+  if [[ ! -d "${GAMEPOWERS_SKILLS_TARGET}" ]]; then
+    echo "GamePowers skills 目录不存在: ${GAMEPOWERS_SKILLS_TARGET}" >&2
+    exit 1
+  fi
+
+  ensure_symlink "${GAMEPOWERS_SKILLS_LINK}" "${GAMEPOWERS_SKILLS_TARGET}" "gamepowers skills"
+
   log "安装当前 GamePowers（editable）"
-  run_cmd python3 -m pip install -e "${REPO_ROOT}"
+  if run_cmd python3 -m pip install -e "${REPO_ROOT}"; then
+    return
+  fi
+
+  log "标准 pip 安装失败，尝试 --break-system-packages"
+  if run_cmd python3 -m pip install --break-system-packages -e "${REPO_ROOT}"; then
+    return
+  fi
+
+  log "警告：GamePowers CLI 安装失败，但 skills 软链已完成，可在 Codex 中发现并使用。"
+  log "如需 CLI，请使用虚拟环境：python3 -m venv .venv && source .venv/bin/activate && pip install -e ."
 }
 
 init_bd_repo() {
