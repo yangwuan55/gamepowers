@@ -33,7 +33,9 @@ cd /Users/ymr/github/gamepowers
 ./tools/install_all.sh
 ```
 
-也可以直接把安装文档交给 AI 执行：`/Users/ymr/github/gamepowers/.codex/INSTALL.md`
+也可以直接把安装文档交给 AI 执行：`/Users/ymr/github/gamepowers/.codex/INSTALL.md`  
+在线版本：`https://raw.githubusercontent.com/yangwuan55/gamepowers/refs/heads/main/.codex/INSTALL.md`  
+仓库地址：`https://github.com/yangwuan55/gamepowers`
 
 该脚本会自动完成：
 - 安装或更新 `beads`（`bd` 命令）。
