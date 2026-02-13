@@ -1,0 +1,213 @@
+{
+  "version": "1.0",
+  "project": "GamePowers",
+  "tasks": [
+    {
+      "key": "GP-001",
+      "title": "定义玩法愿景与边界",
+      "type": "feature",
+      "priority": 1,
+      "architecture": "DESIGN",
+      "docs": [
+        "docs/gamepowers/gameplay/gameplay-vision.md"
+      ],
+      "ecs_refs": [],
+      "deps": [],
+      "acceptance": [
+        "明确目标玩家和核心幻想",
+        "列出至少三个设计约束"
+      ]
+    },
+    {
+      "key": "GP-002",
+      "title": "定义核心循环与状态机",
+      "type": "feature",
+      "priority": 1,
+      "architecture": "DESIGN",
+      "docs": [
+        "docs/gamepowers/gameplay/core-loop-spec.md"
+      ],
+      "ecs_refs": [],
+      "deps": ["GP-001"],
+      "acceptance": [
+        "给出主循环步骤",
+        "定义异常流程"
+      ]
+    },
+    {
+      "key": "GP-003",
+      "title": "编写机制规格与优先级",
+      "type": "task",
+      "priority": 1,
+      "architecture": "DESIGN",
+      "docs": [
+        "docs/gamepowers/gameplay/mechanics-spec.md"
+      ],
+      "ecs_refs": [],
+      "deps": ["GP-002"],
+      "acceptance": [
+        "规则具备输入、判定、输出",
+        "冲突优先级可执行"
+      ]
+    },
+    {
+      "key": "GP-004",
+      "title": "设计角色与战斗定位",
+      "type": "task",
+      "priority": 2,
+      "architecture": "DESIGN",
+      "docs": [
+        "docs/gamepowers/characters/character-roster.md"
+      ],
+      "ecs_refs": [],
+      "deps": ["GP-002"],
+      "acceptance": [
+        "职业定位清晰",
+        "存在克制关系"
+      ]
+    },
+    {
+      "key": "GP-005",
+      "title": "设计关卡框架与难度曲线",
+      "type": "task",
+      "priority": 2,
+      "architecture": "DESIGN",
+      "docs": [
+        "docs/gamepowers/levels/level-design-framework.md"
+      ],
+      "ecs_refs": [],
+      "deps": ["GP-002"],
+      "acceptance": [
+        "定义关卡结构",
+        "定义难度节奏"
+      ]
+    },
+    {
+      "key": "GP-006",
+      "title": "设计装备与物品框架",
+      "type": "task",
+      "priority": 2,
+      "architecture": "DESIGN",
+      "docs": [
+        "docs/gamepowers/equipment/equipment-framework.md",
+        "docs/gamepowers/items/item-system-spec.md"
+      ],
+      "ecs_refs": [],
+      "deps": ["GP-003"],
+      "acceptance": [
+        "装备和物品分类明确",
+        "产出与回收路径完整"
+      ]
+    },
+    {
+      "key": "GP-007",
+      "title": "设计经济与平衡框架",
+      "type": "feature",
+      "priority": 1,
+      "architecture": "DESIGN",
+      "docs": [
+        "docs/gamepowers/economy/economy-model.md"
+      ],
+      "ecs_refs": [],
+      "deps": ["GP-003", "GP-006"],
+      "acceptance": [
+        "定义核心货币",
+        "定义通胀控制策略"
+      ]
+    },
+    {
+      "key": "GP-008",
+      "title": "设计 LiveOps 活动节奏",
+      "type": "task",
+      "priority": 2,
+      "architecture": "DESIGN",
+      "docs": [
+        "docs/gamepowers/liveops/season-event-framework.md"
+      ],
+      "ecs_refs": [],
+      "deps": ["GP-007"],
+      "acceptance": [
+        "定义赛季节奏",
+        "定义活动类型"
+      ]
+    },
+    {
+      "key": "GP-009",
+      "title": "定义埋点与指标口径",
+      "type": "task",
+      "priority": 1,
+      "architecture": "DESIGN",
+      "docs": [
+        "docs/gamepowers/telemetry/kpi-and-events.md"
+      ],
+      "ecs_refs": [],
+      "deps": ["GP-002", "GP-007"],
+      "acceptance": [
+        "核心 KPI 定义完成",
+        "关键事件埋点覆盖核心循环"
+      ]
+    },
+    {
+      "key": "GP-010",
+      "title": "输出 ECS 架构蓝图",
+      "type": "feature",
+      "priority": 1,
+      "architecture": "ECS",
+      "docs": [
+        "docs/gamepowers/ecs/ecs-principles.md",
+        "docs/gamepowers/ecs/entity-component-catalog.md"
+      ],
+      "ecs_refs": [
+        "docs/gamepowers/ecs/ecs-principles.md",
+        "docs/gamepowers/ecs/entity-component-catalog.md"
+      ],
+      "deps": ["GP-003", "GP-004", "GP-005"],
+      "acceptance": [
+        "实体和组件目录完整",
+        "系统边界清晰"
+      ]
+    },
+    {
+      "key": "GP-011",
+      "title": "定义 ECS 调度与性能预算",
+      "type": "feature",
+      "priority": 1,
+      "architecture": "ECS",
+      "docs": [
+        "docs/gamepowers/ecs/system-schedule.md",
+        "docs/gamepowers/ecs/event-flow.md",
+        "docs/gamepowers/ecs/performance-budget.md"
+      ],
+      "ecs_refs": [
+        "docs/gamepowers/ecs/system-schedule.md",
+        "docs/gamepowers/ecs/event-flow.md",
+        "docs/gamepowers/ecs/performance-budget.md"
+      ],
+      "deps": ["GP-009", "GP-010"],
+      "acceptance": [
+        "系统调度顺序确定",
+        "帧预算与监控策略确定"
+      ]
+    },
+    {
+      "key": "GP-012",
+      "title": "生成交接包并进入 superpowers 实现",
+      "type": "epic",
+      "priority": 1,
+      "architecture": "ECS",
+      "docs": [
+        "docs/gamepowers/handoffs/design-handoff-to-superpowers.md"
+      ],
+      "ecs_refs": [
+        "docs/gamepowers/ecs/system-schedule.md",
+        "docs/gamepowers/ecs/event-flow.md",
+        "docs/gamepowers/ecs/performance-budget.md"
+      ],
+      "deps": ["GP-008", "GP-009", "GP-011"],
+      "acceptance": [
+        "交接包包含任务、文档、bd ID、ECS 契约",
+        "可直接调用 superpowers:writing-plans"
+      ]
+    }
+  ]
+}

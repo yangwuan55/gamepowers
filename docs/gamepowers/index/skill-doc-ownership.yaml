@@ -1,0 +1,124 @@
+version: "1.0"
+policy:
+  single_owner: true
+  require_reviewer: true
+  conflict_record_dir: "docs/gamepowers/adr"
+
+skills:
+  game-design-orchestrator:
+    role: orchestrator
+    owns:
+      - "docs/gamepowers/index/domain-index.md"
+      - "docs/gamepowers/tasks/executable-task-list.md"
+      - "docs/gamepowers/index/task-doc-map.yaml"
+    reviews:
+      - "docs/gamepowers/gameplay/*"
+      - "docs/gamepowers/levels/*"
+      - "docs/gamepowers/characters/*"
+      - "docs/gamepowers/equipment/*"
+      - "docs/gamepowers/skills/*"
+      - "docs/gamepowers/items/*"
+      - "docs/gamepowers/economy/*"
+      - "docs/gamepowers/liveops/*"
+      - "docs/gamepowers/telemetry/*"
+      - "docs/gamepowers/anti-cheat/*"
+      - "docs/gamepowers/ecs/*"
+
+  design-handoff-to-superpowers:
+    role: orchestrator
+    owns:
+      - "docs/gamepowers/handoffs/*"
+    reviews:
+      - "docs/gamepowers/index/task-doc-map.yaml"
+      - "docs/gamepowers/index/bd-task-map*.json"
+
+  ecs-architecture-designer:
+    role: architecture
+    owns:
+      - "docs/gamepowers/ecs/*"
+    reviews:
+      - "docs/gamepowers/gameplay/*"
+      - "docs/gamepowers/levels/*"
+      - "docs/gamepowers/characters/*"
+      - "docs/gamepowers/skills/*"
+
+  game-vision-alignment:
+    role: domain
+    owns:
+      - "docs/gamepowers/gameplay/gameplay-vision.md"
+    reviews: []
+
+  core-loop-architect:
+    role: domain
+    owns:
+      - "docs/gamepowers/gameplay/core-loop-spec.md"
+    reviews:
+      - "docs/gamepowers/gameplay/mechanics-spec.md"
+
+  mechanic-spec-writer:
+    role: domain
+    owns:
+      - "docs/gamepowers/gameplay/mechanics-spec.md"
+      - "docs/gamepowers/skills/skill-system-spec.md"
+    reviews:
+      - "docs/gamepowers/ecs/*"
+
+  combat-and-roles-designer:
+    role: domain
+    owns:
+      - "docs/gamepowers/characters/character-roster.md"
+    reviews:
+      - "docs/gamepowers/skills/skill-system-spec.md"
+
+  progression-structure-designer:
+    role: domain
+    owns:
+      - "docs/gamepowers/equipment/equipment-framework.md"
+      - "docs/gamepowers/items/item-system-spec.md"
+    reviews:
+      - "docs/gamepowers/characters/character-roster.md"
+
+  economy-model-designer:
+    role: domain
+    owns:
+      - "docs/gamepowers/economy/economy-model.md"
+    reviews:
+      - "docs/gamepowers/items/item-system-spec.md"
+      - "docs/gamepowers/equipment/equipment-framework.md"
+
+  balance-framework:
+    role: domain
+    owns:
+      - "docs/gamepowers/economy/balance-framework.md"
+    reviews:
+      - "docs/gamepowers/gameplay/mechanics-spec.md"
+      - "docs/gamepowers/economy/economy-model.md"
+
+  content-pipeline-planner:
+    role: domain
+    owns:
+      - "docs/gamepowers/levels/level-design-framework.md"
+    reviews:
+      - "docs/gamepowers/liveops/season-event-framework.md"
+
+  liveops-event-designer:
+    role: domain
+    owns:
+      - "docs/gamepowers/liveops/season-event-framework.md"
+    reviews:
+      - "docs/gamepowers/economy/economy-model.md"
+
+  telemetry-kpi-designer:
+    role: domain
+    owns:
+      - "docs/gamepowers/telemetry/kpi-and-events.md"
+    reviews:
+      - "docs/gamepowers/gameplay/core-loop-spec.md"
+
+  anti-cheat-and-exploit-review:
+    role: domain
+    owns:
+      - "docs/gamepowers/anti-cheat/risk-model.md"
+    reviews:
+      - "docs/gamepowers/economy/economy-model.md"
+      - "docs/gamepowers/telemetry/kpi-and-events.md"

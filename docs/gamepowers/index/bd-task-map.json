@@ -1,0 +1,91 @@
+{
+  "parent": "gamepowers-629",
+  "task_key_to_bd": {
+    "GP-001": "gamepowers-629.1",
+    "GP-002": "gamepowers-629.2",
+    "GP-003": "gamepowers-629.3",
+    "GP-004": "gamepowers-629.4",
+    "GP-005": "gamepowers-629.5",
+    "GP-006": "gamepowers-629.6",
+    "GP-007": "gamepowers-629.7",
+    "GP-008": "gamepowers-629.8",
+    "GP-009": "gamepowers-629.9",
+    "GP-010": "gamepowers-629.10",
+    "GP-011": "gamepowers-629.11",
+    "GP-012": "gamepowers-629.12"
+  },
+  "dependencies": [
+    {
+      "blocked": "GP-002",
+      "blocker": "GP-001"
+    },
+    {
+      "blocked": "GP-003",
+      "blocker": "GP-002"
+    },
+    {
+      "blocked": "GP-004",
+      "blocker": "GP-002"
+    },
+    {
+      "blocked": "GP-005",
+      "blocker": "GP-002"
+    },
+    {
+      "blocked": "GP-006",
+      "blocker": "GP-003"
+    },
+    {
+      "blocked": "GP-007",
+      "blocker": "GP-003"
+    },
+    {
+      "blocked": "GP-007",
+      "blocker": "GP-006"
+    },
+    {
+      "blocked": "GP-008",
+      "blocker": "GP-007"
+    },
+    {
+      "blocked": "GP-009",
+      "blocker": "GP-002"
+    },
+    {
+      "blocked": "GP-009",
+      "blocker": "GP-007"
+    },
+    {
+      "blocked": "GP-010",
+      "blocker": "GP-003"
+    },
+    {
+      "blocked": "GP-010",
+      "blocker": "GP-004"
+    },
+    {
+      "blocked": "GP-010",
+      "blocker": "GP-005"
+    },
+    {
+      "blocked": "GP-011",
+      "blocker": "GP-009"
+    },
+    {
+      "blocked": "GP-011",
+      "blocker": "GP-010"
+    },
+    {
+      "blocked": "GP-012",
+      "blocker": "GP-008"
+    },
+    {
+      "blocked": "GP-012",
+      "blocker": "GP-009"
+    },
+    {
+      "blocked": "GP-012",
+      "blocker": "GP-011"
+    }
+  ]
+}
