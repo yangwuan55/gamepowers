@@ -33,6 +33,8 @@ cd /Users/ymr/github/gamepowers
 ./tools/install_all.sh
 ```
 
+也可以直接把安装文档交给 AI 执行：`/Users/ymr/github/gamepowers/.codex/INSTALL.md`
+
 该脚本会自动完成：
 - 安装或更新 `beads`（`bd` 命令）。
 - 安装或更新 `superpowers` 到 `~/.codex/superpowers`。
